@@ -1,0 +1,20 @@
+{
+  "name": "valenciesquiz",
+  "version": "1.0.0",
+  "description": "A quiz to help learn chemical symbols and valencies",
+  "main": "chemical.js",
+  "directories": {
+    "test": "test"
+  },
+  "dependencies": {
+    "oboe": "^2.1.2"
+  },
+  "devDependencies": {
+    "mocha": "^2.2.5"
+  },
+  "scripts": {
+    "test": "mocha"
+  },
+  "author": "",
+  "license": "ISC"
+}
