@@ -1,34 +1,23 @@
 module.exports = function Quiz(){
-  this.getQuestionData = function(questionType, callback){
-    /*var json = '{ "1": {"name": "Sodium"},
-                  "2": {"name": "Potassium"}
-                }' */
+  promisify = require("es6-promisify");
+  this.getQuestionData = function(questionType){
+    /* return ALL the data available for a particular queston type, so client
+      can process either a set number of question, or continuous questions until
+      stopped */
+      return loadData().then(function(){console.log("Promises function")})
+}
 
+function loadData(){
     var fs = require('fs')
     var path = require('path')
     var filePath = "./data/"
-
-
-      var quiz = []
-    fs.readdir(filePath, function (err, list) {
-        var counter = 0
-      list.forEach(function (file) {
-        if (path.extname(file) === '.json'){
-          //console.log(filePath + file)
-          fs.readFile(filePath + file, 'utf8', function (err, data) {
-            if (err) {throw err;}
-            //var chemical = JSON.parse(data);
-            //console.log(chemical)
-            quiz.push(data)
-          });
-        }
-        counter++
-        if (counter == list.length){
-          callback(JSON.stringify(quiz))
-        }
-      });
-      if (err) reject(err)
+    return Promise.promisify(fs.readdir)
+    .then(function(list){
+      dataFiles = readdir_promise( "./data")
+      dataFiles.then(function (list){console.log(list)})
+      return dataFiles
     })
-  }
+  //read JSON files, process into objects, return to getQuestionData
+}
 
 }

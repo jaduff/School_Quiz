@@ -1,6 +1,10 @@
 var assert = require("assert"); //node.js core module
+var chai = require("chai");
+var chaiAsPromised = require("chai-as-promised");
+
+chai.use(chaiAsPromised);
+
 var Quiz = require("../quiz.js"); //quiz module
-var oboe = require("oboe"); //oboe JSON parsing module
 
 describe('quiz class exists', function(){
   var quiz = new Quiz("elements");
@@ -8,17 +12,23 @@ describe('quiz class exists', function(){
     assert.equal(typeof quiz, 'object');
   });
   it('should return a JSON string', function(){
-    quiz.getQuestionData("name", function(quiz) { assert.equal(typeof quiz, string)})
-    //assert.equal(typeof quiz.getQuestionData("name"), 'string');
+    return quiz.getQuestionData("name").should.eventually.have.typeof.string
+    //quiz.getQuestionData("name")
+    //assert.equal(typeof data, 'string');
   })
-  it('should return a JSON string that converts to an object containing a key of name which contains a string', function(){
-    var questions = (JSON.parse(quiz.getQuestionData("name")))
-    //console.log(questions[1].name)
 
-    assert.equal(typeof questions[1].name, 'string')
+  it('should return a JSON string that converts to an object containing a key of name which contains a string', function(){
+    return quiz.getQuestionData("name").then(function(quiz){
+      var questions = (JSON.parse(quiz))
+      console.log("queston is " + questions)
+      assert.equal(typeof questions[1].name, 'string')
+    })
   })
   it('should return a JSON string of all element names', function(){
-    var questions = (JSON.parse(quiz.getQuestionData("name")))
+    //quiz.getQuestionData("name", function(quiz) { assert.equal(typeof quiz, string)})
+    return quiz.getQuestionData("name").then(function(quiz){
+
+    })
 
   })
 })
