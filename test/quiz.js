@@ -1,18 +1,18 @@
-var assert = require("assert"); //node.js core module
 var chai = require("chai");
+var assert = require('chai').assert
+var should = chai.should();
 var chaiAsPromised = require("chai-as-promised");
-
 chai.use(chaiAsPromised);
 
 var Quiz = require("../quiz.js"); //quiz module
 
-describe('quiz class exists', function(){
+describe('quiz class', function(){
   var quiz = new Quiz("elements");
   it('should be a valid class', function(){
     assert.equal(typeof quiz, 'object');
   });
   it('should return a JSON string', function(){
-    return quiz.getQuestionData("name").should.eventually.have.typeof.string
+    return quiz.getQuestionData("name").should.eventually.be.a('string')
     //quiz.getQuestionData("name")
     //assert.equal(typeof data, 'string');
   })
@@ -30,5 +30,16 @@ describe('quiz class exists', function(){
 
     })
 
+  })
+  describe('getFiles', function(){
+    it('should return a list of files', function(){
+      quiz.getFiles().should.eventually.be.a('list')
+
+    })
+  })
+  describe('readFiles', function(){
+    it('should return a list of JSON objects', function(){
+      quiz.readFiles(["oxygen.json", "hydrogen.json"]).should.eventually.be.a('array')
+    })
   })
 })
