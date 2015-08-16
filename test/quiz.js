@@ -12,4 +12,11 @@ describe('quiz class', function(){
     assert.equal(typeof quiz, 'object');
   });
 
+  describe('listFiles', function(){
+    var quiz = new Quiz("elements")
+    it('should eventually return a list', function(){
+      quiz.listFiles().should.eventually.be.a('list')
+    })
+  })
+
 })
