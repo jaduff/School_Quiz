@@ -12,22 +12,22 @@ describe('quiz class', function(){
     assert.equal(typeof quiz, 'object');
   });
   it('should return a JSON string', function(){
-    return quiz.getQuestionData("name").should.eventually.be.a('string')
+    return quiz.getQuestionData("name").should.eventually.be.a('array')
     //quiz.getQuestionData("name")
     //assert.equal(typeof data, 'string');
   })
 
   it('should return a JSON string that converts to an object containing a key of name which contains a string', function(){
     return quiz.getQuestionData("name").then(function(quiz){
-      var questions = (JSON.parse(quiz))
-      console.log("queston is " + questions)
+      var questions = (quiz.toString())
+      //console.log("queston is " + questions)
       assert.equal(typeof questions[1].name, 'string')
     })
   })
   it('should return a JSON string of all element names', function(){
     //quiz.getQuestionData("name", function(quiz) { assert.equal(typeof quiz, string)})
     return quiz.getQuestionData("name").then(function(quiz){
-
+      //console.log(quiz.toString())
     })
 
   })
