@@ -7,17 +7,16 @@ module.exports = function Quiz(){
   datadir = "./data"
 
 this.listFiles = function(callback){
-  fs.readdir(datadir, readfiles)
+  return readdir(datadir).then(readfiles)
 }
 
-function readfiles(err, list){
-  if (err)throw err;
+function readfiles(list){
     var reg = /\.json$/i
     var JSONList = list.filter(function(i){
       if (reg.test(i)){return i}
     })
     console.log(JSONList)
-    callback(JSONList)
+    return JSONList
 }
 
 /*

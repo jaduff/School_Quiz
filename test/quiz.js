@@ -15,62 +15,46 @@ describe('quiz class', function(){
   describe('listFiles', function(){
     var quiz = new Quiz("elements")
     it('should eventually return an array', function(){
-      //return quiz.listFiles().should.eventually.be.a('array')
-      quiz.listFiles(function(err, list){
-        if (err) throw err;
-        list.should.be.a('array')
-      })
+      return quiz.listFiles().should.eventually.be.a('array')
     })
     it('should eventually return an array with a size greater than 0', function(){
-      //return quiz.listFiles().should.eventually.have.length.above(0)
-      quiz.listFiles(function(err, list){
-        if (err) throw err;
-        list.should.have.length.above(0)
-      })
+      return quiz.listFiles().should.eventually.have.length.above(0)
     })
     it('should eventually return an array containing "chlorine"', function(){
-      //return quiz.listFiles().should.eventually.contain("chlorine")
-      quiz.listFiles(function(err, list){
-        if (err) throw err;
-        list.should.contain("chlorine")
-      })
+      return quiz.listFiles().should.eventually.contain("chlorine.json")
     })
     describe('listFiles("elements")', function(){
       it('should eventually return an array with a length of 25', function(){
-        //return quiz.listFiles().should.eventually.have.length.of(25)
-        quiz.listFiles(function(err, list){
-          if (err) throw err;
-          list.should.have.length.of(25)
-        })
+        return quiz.listFiles().should.eventually.have.length.of(25)
       })
       it('should eventually return an array with all the elements', function(){
         quiz.listFiles(function(err, list){
           if (err) throw err;
-            list.should.contain("aluminium")
-            list.should.contain("chlorine")
-            list.should.contain("barium")
-            list.should.contain("bromine")
-            list.should.contain("calcium")
-            list.should.contain("chromium")
-            list.should.contain("cobalt")
-            list.should.contain("copper")
-            list.should.contain("fluorine")
-            list.should.contain("gold")
-            list.should.contain("hydrogen")
-            list.should.contain("iron")
-            list.should.contain("lead")
-            list.should.contain("magnesium")
-            list.should.contain("mercury")
-            list.should.contain("nickel")
-            list.should.contain("nitrogen")
-            list.should.contain("oxygen")
-            list.should.contain("phosphorus")
-            list.should.contain("potassium")
-            list.should.contain("silver")
-            list.should.contain("sodium")
-            list.should.contain("sulfur")
-            list.should.contain("tin")
-            list.should.contain("zinc")
+            quiz.listfiles().should.contain("aluminium")
+            quiz.listfiles().should.contain("chlorine")
+            quiz.listfiles().should.contain("barium")
+            quiz.listfiles().should.contain("bromine")
+            quiz.listfiles().should.contain("calcium")
+            quiz.listfiles().should.contain("chromium")
+            quiz.listfiles().should.contain("cobalt")
+            quiz.listfiles().should.contain("copper")
+            quiz.listfiles().should.contain("fluorine")
+            quiz.listfiles().should.contain("gold")
+            quiz.listfiles().should.contain("hydrogen")
+            quiz.listfiles().should.contain("iron")
+            quiz.listfiles().should.contain("lead")
+            quiz.listfiles().should.contain("magnesium")
+            quiz.listfiles().should.contain("mercury")
+            quiz.listfiles().should.contain("nickel")
+            quiz.listfiles().should.contain("nitrogen")
+            quiz.listfiles().should.contain("oxygen")
+            quiz.listfiles().should.contain("phosphorus")
+            quiz.listfiles().should.contain("potassium")
+            quiz.listfiles().should.contain("silver")
+            quiz.listfiles().should.contain("sodium")
+            quiz.listfiles().should.contain("sulfur")
+            quiz.listfiles().should.contain("tin")
+            quiz.listfiles().should.contain("zinc")
           })
       })
     })
