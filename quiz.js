@@ -6,33 +6,21 @@ module.exports = function Quiz(){
   readfile = promisify(fs.readFile)
   datadir = "./data"
 
-this.listFiles = function(callback){
-  return readdir(datadir).then(readfiles)
-}
-
-function readfiles(list){
-    var reg = /\.json$/i
-    var JSONList = list.filter(function(i){
-      if (reg.test(i)){return i}
-    })
-    console.log(JSONList)
-    return JSONList
-}
-
-/*
   this.listFiles = function(){
-    return new Promise(function (resolve, reject){
-      readdir(datadir).map(function(filename){
-          var reg = /\.json$/i
-          var JSONList = list.filter(function(i){
-            if (reg.test(i)){return readfile(datadir + "/" + filename)}
-          })
-        })
-      var list = ["chlorine", 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
-      resolve(list)
+    return readdir(datadir).then(function(list){
+      var reg = /\.json$/i
+      var JSONList = list.filter(function(i){
+        if (reg.test(i)){return i}
+      })
+      return JSONList
     })
-    .then(function(list){
-      console.log(list)
+  }
+
+  function readfiles(list){
+    var promises = list.map(function(file){
+      return readfile(datadir + "/" + file)
     })
-  }*/
+    return Promise.all(promises)
+  }
+
 }
