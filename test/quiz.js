@@ -25,9 +25,10 @@ describe('quiz class', function(){
     })
     it('should not return any files that do NOT contain .json', function(){
       //this possibly doesn't return a promise.
-      return quiz.listFiles().then(function(){
+      return quiz.listFiles().then(function(list){
+        console.log(typeof(list))
         var reg = /\.json$/i
-        list.foreach(function(filename){
+        list.forEach(function(filename){
           if (reg.test(filename) == false){throw "Not a .json file"}
         })
       })
@@ -38,31 +39,7 @@ describe('quiz class', function(){
         return quiz.listFiles().should.eventually.have.length.of(25)
       })
       it('should eventually return an array with all the elements', function(){
-            return quiz.listFiles().should.eventually.contain("aluminium")
-            return quiz.listFiles().should.eventually.contain("barium")
-            return quiz.listFiles().should.eventually.contain("bromine")
-            return quiz.listFiles().should.eventually.contain("calcium")
-            return quiz.listFiles().should.eventually.contain("chlorine")
-            return quiz.listFiles().should.eventually.contain("chromium")
-            return quiz.listFiles().should.eventually.contain("cobalt")
-            return quiz.listFiles().should.eventually.contain("copper")
-            return quiz.listFiles().should.eventually.contain("fluorine")
-            return quiz.listFiles().should.eventually.contain("gold")
-            return quiz.listFiles().should.eventually.contain("hydrogen")
-            return quiz.listFiles().should.eventually.contain("iron")
-            return quiz.listFiles().should.eventually.contain("lead")
-            return quiz.listFiles().should.eventually.contain("magnesium")
-            return quiz.listFiles().should.eventually.contain("mercury")
-            return quiz.listFiles().should.eventually.contain("nickel")
-            return quiz.listFiles().should.eventually.contain("nitrogen")
-            return quiz.listFiles().should.eventually.contain("oxygen")
-            return quiz.listFiles().should.eventually.contain("phosphorus")
-            return quiz.listFiles().should.eventually.contain("potassium")
-            return quiz.listFiles().should.eventually.contain("silver")
-            return quiz.listFiles().should.eventually.contain("sodium")
-            return quiz.listFiles().should.eventually.contain("sulfur")
-            return quiz.listFiles().should.eventually.contain("tin")
-            return quiz.listFiles().should.eventually.contain("zinc")
+            return quiz.listFiles().should.eventually.contain("zinc.json")
       })
     })
   })
