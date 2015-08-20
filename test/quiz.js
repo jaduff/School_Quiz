@@ -42,6 +42,12 @@ describe('quiz class', function(){
             return quiz.listFiles().should.eventually.contain("zinc.json")
       })
     })
+    describe('readfiles(file)', function(){
+      var list = ["chlorine.json", "hydrogen.json"]
+      it('should return the data', function(){
+        return quiz.readfiles(list).should.eventually.have.length.of(2)
+      })
+    })
   })
 
 })

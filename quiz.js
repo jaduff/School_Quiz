@@ -16,7 +16,7 @@ module.exports = function Quiz(){
     })
   }
 
-  function readfiles(list){
+  this.readfiles = function(list){
     var promises = list.map(function(file){
       return readfile(datadir + "/" + file)
     })
