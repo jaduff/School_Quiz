@@ -43,9 +43,21 @@ describe('quiz class', function(){
       })
     })
     describe('readfiles(file)', function(){
-      var list = ["chlorine.json", "hydrogen.json"]
       it('should return the data', function(){
+        var list = ["chlorine.json", "hydrogen.json"]
         return quiz.readfiles(list).should.eventually.have.length.of(2)
+      })
+      it('should return an array of strings', function(){
+        var list = ["chlorine.json", "hydrogen.json"]
+        return quiz.readfiles(list).then(function(data){
+          data.forEach(function(datum){
+            assert.equal(typeof(datum), "string")
+          })
+        })
+      })
+      it('should return an error if the file does not exist', function(){
+        var list = ["chlorine.json", "imaginary.json"]
+        return quiz.readfiles(list).should.be.rejected
       })
     })
   })

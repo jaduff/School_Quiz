@@ -18,7 +18,7 @@ module.exports = function Quiz(){
 
   this.readfiles = function(list){
     var promises = list.map(function(file){
-      return readfile(datadir + "/" + file)
+      return readfile(datadir + "/" + file, "utf-8")
     })
     return Promise.all(promises)
   }
