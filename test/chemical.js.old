@@ -1,4 +1,9 @@
-var assert = require("assert"); //node.js core module
+var chai = require("chai");
+var assert = require('chai').assert
+var expect = require('chai').expect
+var should = chai.should();
+var chaiAsPromised = require("chai-as-promised");
+chai.use(chaiAsPromised);
 var Chemical = require("../chemical.js");
 
 //TESTING CHEMICAL CLASS
@@ -9,13 +14,13 @@ describe('Chemical Class', function(){
     assert.equal(typeof chemical, 'object');
   });
   it('should return a string for this.getName()', function(){
-    assert.equal(typeof chemical.getName(), 'string');
+    expect(chemical.getName).to.throw('Name not defined')
   })
   it('should return a string for this.getSymbol()', function(){
-    assert.equal(typeof chemical.getSymbol(), 'string');
+    expect(chemical.getSymbol).to.throw('Symbol not defined')
   })
   it('should return a number for this.getValence()', function(){
-    assert.equal(typeof chemical.getValence(), 'number');
+    expect(chemical.getValence).to.throw('Valence not defined')
   })
 })
 

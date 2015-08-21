@@ -6,6 +6,22 @@ module.exports = function Quiz(){
   readfile = promisify(fs.readFile)
   datadir = "./data"
 
+  this.chemicals = null
+
+  this.getChemicals = function(){
+    if (this.chemicals){
+      //return a promise that resolves instantly, so that return is always a promise.
+      return chemicals = new Promise(function(resolve, reject){
+        resolve(this.chemicals)
+      })
+    }
+    //if this.chemicals hasn't been set yet (is null), get data for it through promises.
+    return this.listFiles().then(this.readfiles).then(function(data){
+      this.chemicals = data
+      return this.chemicals})
+
+  }
+
   this.listFiles = function(){
     return readdir(datadir).then(function(list){
       var reg = /\.json$/i
@@ -18,7 +34,9 @@ module.exports = function Quiz(){
 
   this.readfiles = function(list){
     var promises = list.map(function(file){
-      return readfile(datadir + "/" + file, "utf-8")
+      return readfile(datadir + "/" + file, "utf-8").then(function(data){
+        if (data){return JSON.parse(data)}
+      })
     })
     return Promise.all(promises)
   }
