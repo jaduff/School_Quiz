@@ -1,8 +1,0 @@
-{
-  "name": "Hydrogen",
-  "symbol": "H",
-  "valencies": {
-    "hydrogen": 1,
-    "hydride": -1
-  }
-}
