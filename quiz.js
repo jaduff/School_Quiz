@@ -12,7 +12,7 @@ module.exports = function Quiz(){
     switch(request){
       case "name":
         return this.getChemicals().then(function(data){
-          data = data.map(function(chemical){
+          return data = data.map(function(chemical){
             return chemical.name
           })
         })

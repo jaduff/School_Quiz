@@ -77,9 +77,7 @@ describe('quiz class - Elements', function(){
     })
     it('should return an array or strings', function(){
       return quiz.getChemicals("name").then(function(data){
-        console.log(data)
         data.forEach(function(chemical){
-          console.log("here" + typeof(chemical))
           assert.equal(typeof(chemical), "string")
         })
       })
