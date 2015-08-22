@@ -8,17 +8,27 @@ module.exports = function Quiz(){
 
   this.chemicals = null
 
-  this.getChemicals = function(){
-    if (this.chemicals){
-      //return a promise that resolves instantly, so that return is always a promise.
-      return chemicals = new Promise(function(resolve, reject){
-        resolve(this.chemicals)
-      })
+  this.getChemicals = function(request){
+    switch(request){
+      case "name":
+        return this.getChemicals().then(function(data){
+          data = data.map(function(chemical){
+            return chemical.name
+          })
+        })
+        break;
+      default:
+        if (this.chemicals){
+          //return a promise that resolves instantly, so that return is always a promise.
+          return chemicals = new Promise(function(resolve, reject){
+            resolve(this.chemicals)
+          })
+        }
+        //if this.chemicals hasn't been set yet (is null), get data for it through promises.
+        return this.listFiles().then(this.readfiles).then(function(data){
+          this.chemicals = data
+          return this.chemicals})
     }
-    //if this.chemicals hasn't been set yet (is null), get data for it through promises.
-    return this.listFiles().then(this.readfiles).then(function(data){
-      this.chemicals = data
-      return this.chemicals})
 
   }
 
@@ -36,6 +46,7 @@ module.exports = function Quiz(){
     var promises = list.map(function(file){
       return readfile(datadir + "/" + file, "utf-8").then(function(data){
         if (data){return JSON.parse(data)}
+        throw new Error("Empty json file: " + file)
       })
     })
     return Promise.all(promises)

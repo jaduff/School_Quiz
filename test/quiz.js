@@ -71,8 +71,18 @@ describe('quiz class - Elements', function(){
       quiz.chemicals = null
       return quiz.getChemicals().should.eventually.be.a('array')
     })
-    it('should return an array of strings', function(){
-      quiz.getChemicals
+    it('should return an array', function(){
+      quiz.getChemicals("name").should.eventually.be.a('array')
+      quiz.getChemicals("name").should.eventually.have.length.of(26)
+    })
+    it('should return an array or strings', function(){
+      return quiz.getChemicals("name").then(function(data){
+        console.log(data)
+        data.forEach(function(chemical){
+          console.log("here" + typeof(chemical))
+          assert.equal(typeof(chemical), "string")
+        })
+      })
     })
   })
 
