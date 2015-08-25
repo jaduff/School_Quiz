@@ -1,0 +1,27 @@
+{
+  "name": "school_quiz",
+  "version": "0.0.1",
+  "description": "MEAN based quiz site for educational purposes. Starting with Chemical element symbols and valencies.",
+  "main": "app.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jaduff/School_Quiz.git"
+  },
+  "keywords": [
+    "education",
+    "quiz",
+    "mocha",
+    "mean",
+    "chemistry",
+    "tdd"
+  ],
+  "author": "James Duff",
+  "license": "GPL-3.0",
+  "bugs": {
+    "url": "https://github.com/jaduff/School_Quiz/issues"
+  },
+  "homepage": "https://github.com/jaduff/School_Quiz#readme"
+}
