@@ -2,7 +2,7 @@
   "name": "school_quiz",
   "version": "0.0.1",
   "description": "MEAN based quiz site for educational purposes. Starting with Chemical element symbols and valencies.",
-  "main": "app.js",
+  "main": "server.js",
   "scripts": {
     "test": "mocha"
   },
@@ -23,5 +23,14 @@
   "bugs": {
     "url": "https://github.com/jaduff/School_Quiz/issues"
   },
-  "homepage": "https://github.com/jaduff/School_Quiz#readme"
+  "homepage": "https://github.com/jaduff/School_Quiz#readme",
+  "dependencies": {
+    "body-parser": "^1.13.3",
+    "compression": "^1.5.2",
+    "express": "^4.13.3",
+    "hjs": "0.0.6",
+    "hogan-express": "^0.5.2",
+    "method-override": "^2.3.5",
+    "morgan": "^1.6.1"
+  }
 }
