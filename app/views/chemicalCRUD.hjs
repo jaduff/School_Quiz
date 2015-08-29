@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>{{title}}</title>
+  </head>
+  <body>
+    <h1>{{title}}</h1>
+        <table>
+          <th><td>Element</td><td>Symbol</td><td>Valencies</td></th>
+          {{#chemicalList}}
+      <tr><td>{{elementName}}</td><td>{{Symbol}}</td>{{#valencies}}<td>{{valenceName}}</td><td>{{valenceNumber}}</td>{{/valencies}}</tr>
+          {{/chemicalList}}
+        </table>
+          <a href="?page=CRUD&action=add">Add new Element</a>
+  </body>
+</html>
