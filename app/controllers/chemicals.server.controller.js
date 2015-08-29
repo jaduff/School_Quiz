@@ -35,10 +35,9 @@ function controlCRUD(req, res){
         }
       })
     break;
-    default:
+    default: //display the list of chemicals
     renderChemicalList(res)
   }
-
 
 }
 
@@ -46,7 +45,13 @@ function renderChemicalList(res){
   chemicalModel.getChemicals().then(function(chemicalArray){
     res.render('chemicalCRUD', {
     title: 'Modify Chemical Elements',
-    chemicalList: chemicalArray
+    chemicalList: {"chemicalArray": [{"chemicalName":"Chlorine","chemicalSymbol":"Cl"},{"chemicalName": "Hydrogen", "chemicalSymbol": "H"}]} //chemicalArray
+    })
+  }).catch(function(err){
+    console.log(err)
+    res.render('error', {
+      message: 'A serious error has occurred.',
+      error: err
     })
   })
 }
