@@ -1,0 +1,69 @@
+module.exports = function chemicalModel(){
+  var promisify, fs, datadir, iz, jsonio;
+  var JSONio = require('../library/JSONio')
+  //promisify = require("es6-promisify"); //https://www.npmjs.com/package/es6-promisify
+  fs = require('fs')
+  //readfile = promisify(fs.readFile)
+  datafile = "./app/models/data/chemdata.json"
+  iz = require('iz')
+  jsonio = new JSONio(datafile);
+
+
+  this.getChemicals = function(request){
+    console.log("model.getChemicals")
+    switch(request){
+      case "name":
+        return this.getChemicals().then(function(data){
+          return data = data.map(function(chemical){
+            return chemical.name
+          })
+        })
+        break;
+      default:
+
+        return chemicals = new Promise(function(resolve, reject){
+          //check chemicals variable, if empty, read from file.
+          //otherwise return the array from the variable
+          if (!this.chemicals){
+            jsonio.load().then(function(data){
+              this.chemicals = data;
+              resolve(this.chemicals)
+            })
+          }else{
+            console.log("this.chemicals was already defined as: " +this.chemicals.toString())
+          resolve(this.chemicals)}
+
+        })
+    }
+
+  }
+
+  this.save = function(chemicalObject){
+    console.log("1. model.save called with " +JSON.stringify(chemicalObject))
+    console.log("2. this.chemicals is " +JSON.stringify(this.chemicals))
+    return new Promise(function(resolve, reject){
+      if (this.chemicals){
+        console.log("this.chemicals is: "+ JSON.stringify(this.chemicals))
+        this.chemicals = [];
+      }
+      console.log("getting ready to save: " + JSON.stringify(chemicalObject))
+      if (!typeof(chemicalObject) == 'object'){reject(new Error("Invalid chemical"))}
+      if(!iz.alphaNumeric(chemicalObject.chemicalName) || iz.blank(chemicalObject.chemicalName)){reject(new Error("chemicalName"))}
+      if(!iz.alphaNumeric(chemicalObject.chemicalSymbol) || iz.blank(chemicalObject.chemicalSymbol)){reject(new Error("chemicalSymbol"))}
+      if (!chemicalObject.chemicalSymbol){reject(new Error("chemicalSymbol"))}
+      console.log("all ok, continuing with save. This.chemicals.length is "+this.chemicals.length())
+        //this.chemicals.push(chemicalObject)
+        this.chemicals[this.chemicals.length()+1] = chemicalObject
+      console.log("pushed object, now: " +JSON.stringify(this.chemicals))
+      jsonio.save(this.chemicals).then(function(){
+        this.chemicals = null;
+        model.getChemicals()
+      }).then(function(){
+        resolve("saved")
+      }).catch(function(err){
+        throw err
+      })
+    })
+  }
+
+}

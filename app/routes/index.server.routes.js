@@ -4,7 +4,7 @@ module.exports = function(app) {
   var chemicals = require('../controllers/chemicals.server.controller');
 
 
-  app.get('/', index.render);
+  app.get('/', landing.render);
   app.get('/landing', landing.render)
   app.get('/quizzes/elements', chemicals.render)
 };
