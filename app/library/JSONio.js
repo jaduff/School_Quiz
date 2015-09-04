@@ -13,17 +13,21 @@ module.exports = function JSONio(){
           fs.unlinkSync(datafile)
         }
         catch(err) {
-          console.log("Error code is "+err.code)
-          if (err.code != 'ENOENT') {
-            console.log(err)
-            throw err}
+          if (err.code != "ENOENT") {
+            throw(err)}
         }
         fs.writeFile(datafile, JSON.stringify(dataArray), function(err){
-          if (err) return reject(err);
+          if (err) {
+            if (err.code = 'ENOENT'){
+              return reject(new Error("The directory structure for the save file doesn't exist. Please create it: " +datafile))
+            }
+            return reject(err);
+          }
           resolve("saved")
         })
       })
     }).catch(function(err){
+      console.log("JSONio.save .catch error function")
       throw(err)
     })
 

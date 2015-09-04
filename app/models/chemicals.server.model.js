@@ -1,9 +1,7 @@
 module.exports = function chemicalModel(){
   var promisify, fs, iz, jsonio;
   var JSONio = require('../library/JSONio')
-  //promisify = require("es6-promisify"); //https://www.npmjs.com/package/es6-promisify
   fs = require('fs')
-  //readfile = promisify(fs.readFile)
 
   this.datafile = null
   this.chemArray = null
@@ -15,9 +13,11 @@ module.exports = function chemicalModel(){
     return promise = new Promise(function(resolve, reject){
       jsonio.load(datafile).then(function(chemarray){
         console.log("chemarray is "+chemarray)
-        this.chemicals = chemarray
-        resolve(chemarray)
+        debugger;
+        //this.chemicals = chemarray
+        return resolve(chemarray)
       }).catch(function(err){
+        console.log("chemicalModel.getChemicals .catch error function")
         reject(err)
       })
     })
@@ -35,11 +35,12 @@ module.exports = function chemicalModel(){
       jsonio.save(datafile, chemObject).then(function(res){
         console.log("jsonio.save returned "+res)
         if (res == "saved") {
-          return resolve("success")
+          return resolve(res)
         }else{
           return reject(new Error("Failed to save"))
         }
       }).catch(function(err){
+        console.log("chemicalModel.save .catch error function")
         reject(err)
       })
     })

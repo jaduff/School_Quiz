@@ -25,7 +25,7 @@ beforeEach(function(done){
     fs.unlinkSync(datafile)
   }
   catch(err){
-    
+
   }
   jsonio.save(datafile, test_array)
 
@@ -70,6 +70,9 @@ describe('chemicalModel.save()', function(){
   it('should return error code when passed a string', function () {
     return chemicalModel.save(datafile, "string").should.be.rejectedWith(Error)
   });
+  it('should not return an error code when passed an invalid file', function(){
+    return chemicalModel.save("./test/nofile.json", []).should.not.be.rejectedWith(Error)
+  })
 })
 
 })

@@ -43,6 +43,9 @@ describe('JSONio test', function(){
         });
 
     })
+    it('should not fail when given an invalid path', function(){
+      return jsonio.save("./nofolder/nofile.json").should.be.rejectedWith(Error)
+    })
   })
 
   describe('JSONio.load', function(){
