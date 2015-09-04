@@ -9,13 +9,22 @@ module.exports = function JSONio(){
     return that.load(datafile).then(function(dataArray){
       dataArray.push(dataObject)
       return new Promise(function(resolve, reject){
+        try {
+          fs.unlinkSync(datafile)
+        }
+        catch(err) {
+          console.log("Error code is "+err.code)
+          if (err.code != 'ENOENT') {
+            console.log(err)
+            throw err}
+        }
         fs.writeFile(datafile, JSON.stringify(dataArray), function(err){
           if (err) return reject(err);
           resolve("saved")
         })
       })
     }).catch(function(err){
-      reject(err)
+      throw(err)
     })
 
   }
@@ -31,8 +40,13 @@ module.exports = function JSONio(){
           }
           return reject(err)
         }
+        console.log("data is "+data)
         data = data.toString()
-        data = JSON.parse(data)
+        if (data == ""){
+          data = []
+        }else{
+          data = JSON.parse(data)
+        }
         return resolve(data)
       })
     })

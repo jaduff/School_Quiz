@@ -54,12 +54,6 @@ describe('JSONio test', function(){
         data.should.equal(test_array)
       })
     })
-    it('should return an error when an invalid file is given', function(){
-      return jsonio.load("nofile.json").then(function(res){
-        res.should.be.a('error')}).catch(function(err){
-        err.should.be.a('error')
-      })
-    })
   })
 
 })

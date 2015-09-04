@@ -13,12 +13,20 @@ var test_array = [
   {"chemicalName": "Hydrogen", "chemicalSymbol": "H"}
 ];
 
+var test_object = {"chemicalName": "Hydrogen", "chemicalSymbol": "H"}
+
 beforeEach(function(done){
   chemicalModel = new _chemicalModel();
   chemicalModel.datafile = datafile;
 
   var JSONio = require('../app/library/jsonio');
   jsonio = new JSONio();
+  try {
+    fs.unlinkSync(datafile)
+  }
+  catch(err){
+    
+  }
   jsonio.save(datafile, test_array)
 
   done()
@@ -34,7 +42,7 @@ describe('chemicalModel.getChemicals()', function(){
     chemicalModel.getChemicals.should.be.a('function')
   })
   it('should eventually return an array', function(){
-    return chemicalModel.getChemicals(chemicalModel.datafile).should.eventually.be.a('array')
+    return chemicalModel.getChemicals(datafile).should.eventually.be.a('array')
   })
   it('should throw an error when passed an invalid file', function(){
     return chemicalModel.getChemicals("./invalidfile.json").catch(function(err){
@@ -53,8 +61,8 @@ describe('chemicalModel.save()', function(){
     chemicalModel.save.should.be.a('function')
   })
   it('should return success code when passed array and valid file', function () {
-    //return chemicalModel.save(datafile, test_array).should.eventually.be.a('string')
-    return chemicalModel.save(datafile, test_array).should.eventually.be.a('string')
+    //return chemicalModel.save(datafile, test_object).should.eventually.be.a('string')
+    return chemicalModel.save(datafile, test_object).should.eventually.be.a('string')
   });
   it('should return error code when passed null array', function () {
     return chemicalModel.save(datafile, null).should.be.rejectedWith(Error)

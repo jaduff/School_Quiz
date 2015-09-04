@@ -32,8 +32,13 @@ module.exports = function chemicalModel(){
         return reject(new Error("Not an array")
       )}
       console.log("passed validation")
-      jsonio.save(datafile, chemObject).then(function(){
-        return resolve("success")
+      jsonio.save(datafile, chemObject).then(function(res){
+        console.log("jsonio.save returned "+res)
+        if (res == "saved") {
+          return resolve("success")
+        }else{
+          return reject(new Error("Failed to save"))
+        }
       }).catch(function(err){
         reject(err)
       })
