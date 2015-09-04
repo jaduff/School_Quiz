@@ -5,8 +5,8 @@ module.exports = function JSONio(){
   var fs = require('fs');
 
   this.save = function save(datafile, dataObject){
-    that.load(datafile).then(function(dataArray){
-      console.log("Dataarray is " +dataArray)
+    var that = this;
+    return that.load(datafile).then(function(dataArray){
       dataArray.push(dataObject)
       return new Promise(function(resolve, reject){
         fs.writeFile(datafile, JSON.stringify(dataArray), function(err){
@@ -22,15 +22,18 @@ module.exports = function JSONio(){
 
 
   this.load = function load(datafile){
+    console.log("I made it to the load function!")
     return new Promise(function(resolve, reject){
       fs.readFile(datafile, function(err, data){
         if (err) {
-          if (err.code == 'ENOENT') resolve([])
+          if (err.code == 'ENOENT') {
+            return resolve([])
+          }
           return reject(err)
         }
         data = data.toString()
         data = JSON.parse(data)
-        resolve(data)
+        return resolve(data)
       })
     })
   }
