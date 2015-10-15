@@ -1,5 +1,7 @@
 {
-	name: School_Quiz,
-	version: 0.0.1,
-	dependencies: { }
+  "name": "School_Quiz",
+  "version": "0.0.1",
+  "dependencies": {
+    "angular": "~1.4.7"
+  }
 }
