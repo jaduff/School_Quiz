@@ -13,6 +13,9 @@
 		<a href="/signin">Signin</a>
 	{{ /userFullName }}
 
+	<section ng-view>
+	</section>
+
 	<section ng-include="'example/views/example.client.view.html'">
 		</section>
 
